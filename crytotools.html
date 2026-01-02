@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encryption</title>
+    <link rel="stylesheet" href="cryptotools.css">
+    <script src="AEScrypto.js"></script>
+</head>
+<body>
+    <header>
+        <h1>CRYPTO-BOX</h1>
+        <p>Utilize cryptography to ensure the confidentiality of the text.</p>
+    </header>
+
+    <div>
+        <nav>
+            <button id="tab-caesar" class="active" onclick="switchTab('caesar')"> Caesar Cipher</button>
+            <button id="tab-aes" onclick="switchTab('aes')"> AES Encryptor</button>
+        </nav>
+    </div>
+    <div class="tool-container div1" id="caesar-tool" style="display: block;">
+        <h1>Caesar Cipher</h1>
+        <div class="div2">
+            <h3>Input Text</h3>
+            <textarea placeholder="Enter text here..." name="text" id="input-text-caesar" rows="6"></textarea>
+        </div>
+
+        <div class="between">
+            <label for="caesar-key">
+                Cipher Key (1-25):
+                <input type="number" id="caesar-key" min="1" max="25" value="3">
+            </label>
+            <button onclick="encryptCaesar()">Encrypt</button>
+            <button onclick="decryptCaesar()">Decrypt</button>
+        </div>
+
+        <div class="div2">
+            <h3>Output</h3>
+            <textarea placeholder="Output text is here..." id="output-text-caesar" rows="6" readonly></textarea>
+        </div>
+    </div>
+    <div class="tool-container div1" id="aes-tool" style="display: none;">
+        <h1>AES Encryptor</h1>
+        <div class="div2">
+            <h3>Input Text</h3>
+            <textarea placeholder="Enter text here..." id="input-text-aes" rows="6"></textarea>
+        </div>
+
+        <div class="between">
+            <label for="aes-key">
+                Encryption Key n (Password):
+                <input type="text" id="aes-key" value="secretkey">
+            </label>
+            <button onclick="encryptAES()">Encrypt</button>
+            <button onclick="decryptAES()">Decrypt</button>
+        </div>
+
+        <div class="div2">
+            <h3>Output</h3>
+            <textarea placeholder="Output text is here..." id="output-text-aes" rows="6" readonly></textarea>
+        </div>
+    </div>
+   <script>
+    // Function to switch between Caesar Cipher and AES Cipher tabs
+    function switchTab(tabName) {
+        // Get HTML elements for Caesar and AES tools
+        const caesarTool = document.getElementById('caesar-tool');
+        const aesTool = document.getElementById('aes-tool');
+
+        // Get HTML elements for tab buttons
+        const tabCaesar = document.getElementById('tab-caesar');
+        const tabAes = document.getElementById('tab-aes');
+
+        // If Caesar tab is selected
+        if (tabName === 'caesar') {
+            caesarTool.style.display = 'block';   // Show Caesar tool
+            aesTool.style.display = 'none';       // Hide AES tool
+            tabCaesar.classList.add('active');    // Highlight Caesar tab
+            tabAes.classList.remove('active');    // Unhighlight AES tab
+        } 
+        // If AES tab is selected
+        else if (tabName === 'aes') {
+            caesarTool.style.display = 'none';    // Hide Caesar tool
+            aesTool.style.display = 'block';      // Show AES tool
+            tabCaesar.classList.remove('active'); // Unhighlight Caesar tab
+            tabAes.classList.add('active');       // Highlight AES tab
+        }
+    }
+
+    // Function to encrypt text using Caesar Cipher
+    function encryptCaesar() {
+        const inputText = document.getElementById("input-text-caesar").value; // Get input text
+        const key = parseInt(document.getElementById("caesar-key").value);    // Get numeric key
+
+        let encryptedText = ""; // Initialize encrypted text
+
+        // Loop through each character of input
+        for (let i = 0; i < inputText.length; i++) {
+            const charCode = inputText.charCodeAt(i); // Get ASCII code of character
+
+            // Encrypt uppercase letters (A-Z)
+            if (charCode >= 65 && charCode <= 90) {
+                encryptedText += String.fromCharCode(((charCode - 65 + key) % 26) + 65);
+            } 
+            // Encrypt lowercase letters (a-z)
+            else if (charCode >= 97 && charCode <= 122) {
+                encryptedText += String.fromCharCode(((charCode - 97 + key) % 26) + 97);
+            } 
+            // Keep non-alphabetic characters as is
+            else {
+                encryptedText += inputText[i];
+            }
+        }
+
+        // Display encrypted text in output field
+        document.getElementById("output-text-caesar").value = encryptedText;
+    }
+
+    // Function to decrypt text using Caesar Cipher
+    function decryptCaesar() {
+        const inputText = document.getElementById("input-text-caesar").value; // Get input text
+        const key = parseInt(document.getElementById("caesar-key").value);    // Get numeric key
+
+        let decryptedText = ""; // Initialize decrypted text
+
+        // Loop through each character of input
+        for (let i = 0; i < inputText.length; i++) {
+            const charCode = inputText.charCodeAt(i); // Get ASCII code of character
+
+            // Decrypt uppercase letters (A-Z)
+            if (charCode >= 65 && charCode <= 90) {
+                decryptedText += String.fromCharCode(((charCode - 65 - key + 26) % 26) + 65);
+            } 
+            // Decrypt lowercase letters (a-z)
+            else if (charCode >= 97 && charCode <= 122) {
+                decryptedText += String.fromCharCode(((charCode - 97 - key + 26) % 26) + 97);
+            } 
+            // Keep non-alphabetic characters as is
+            else {
+                decryptedText += inputText[i];
+            }
+        }
+
+        // Display decrypted text in output field
+        document.getElementById("output-text-caesar").value = decryptedText;
+    }
+
+    // Function to encrypt text using AES Cipher (CryptoJS library)
+    function encryptAES() {
+        const inputText = document.getElementById('input-text-aes').value; // Get input text
+        const key = document.getElementById('aes-key').value;               // Get AES key
+
+        // Encrypt using CryptoJS AES and convert to string
+        const encrypted = CryptoJS.AES.encrypt(inputText, key).toString();
+
+        // Display encrypted text in output field
+        document.getElementById('output-text-aes').value = encrypted;
+    }
+
+    // Function to decrypt text using AES Cipher (CryptoJS library)
+    function decryptAES() {
+        const inputText = document.getElementById('input-text-aes').value; // Get input text
+        const key = document.getElementById('aes-key').value;               // Get AES key
+        
+        try {
+            // Decrypt using CryptoJS AES
+            const decrypted = CryptoJS.AES.decrypt(inputText, key);
+
+            // Convert decrypted bytes to string
+            const decryptedText = decrypted.toString(CryptoJS.enc.Utf8);
+
+            // If decryption fails or result is empty
+            if (decryptedText === "") {
+                document.getElementById('output-text-aes').value = "Decryption failed. Check key/ciphertext.";
+            } else {
+                document.getElementById('output-text-aes').value = decryptedText;
+            }
+        } catch (e) {
+            // Handle errors (invalid ciphertext)
+            document.getElementById('output-text-aes').value = "Error: Invalid ciphertext format.";
+        }
+    }
+
+    // Automatically switch to Caesar tab when page loads
+    document.addEventListener('DOMContentLoaded', () => {
+        switchTab('caesar'); // Default tab
+    });
+
+</script>
+
+</body>
+</html>

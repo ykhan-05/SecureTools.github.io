@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ICT Project</title>
+    <style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #0d47a1 0%, #1565c0 50%, #0d47a1 100%);
+    color: #333;
+    min-height: 100vh;
+}
+.header {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 25px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    backdrop-filter: blur(10px);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+.brand {
+    font-size: 28px;
+    font-weight: 900;
+    color: #fff;
+    letter-spacing: 3px;
+}
+.menu {
+    display: flex;
+    gap: 30px;
+}
+.menu a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 8px 16px;
+    border-radius: 25px;
+    transition: 0.3s;
+}
+.menu a:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+.banner {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 80px 60px;
+    position: relative;
+    overflow: visible;
+}
+.banner-text {
+    flex: 1;
+    z-index: 2;
+    color: white;
+    max-width: 600px;
+}
+.banner-text h1 {
+    font-size: 64px;
+    font-weight: 900;
+    line-height: 1.2;
+    margin-bottom: 20px;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+.banner-text p {
+    font-size: 20px;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 30px;
+}
+
+
+.banner-graphic {
+    flex: 1;
+    position: relative;
+    height: 600px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: center;
+    justify-items: center;
+}
+.floating-card {
+    position: relative;
+    background: rgba(255, 255, 255, 0.12);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 25px;
+    backdrop-filter: blur(20px);
+    padding: 40px 30px;
+    color: white;
+    font-weight: 600;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    font-size: 18px;
+    width: 280px;
+    height: 220px;
+    transition: all 0.3s ease;
+    animation: pulse-float 4s ease-in-out infinite;
+}
+.floating-card:hover {
+    background: rgba(255, 255, 255, 0.18);
+    transform: translateY(-8px) scale(1.05);
+    box-shadow: 0 15px 40px rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.5);
+}
+.floating-card:nth-child(1) {
+    animation-delay: 0s;
+}
+.floating-card:nth-child(2) {
+    animation-delay: 1s;
+}
+.floating-card:nth-child(3) {
+    animation-delay: 2s;
+}
+.floating-card:nth-child(4) {
+    animation-delay: 3s;
+}
+@keyframes pulse-float {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
+.card-icon {
+    font-size: 50px;
+    display: block;
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));
+}
+.card-title {
+    font-size: 18px;
+    font-weight: 700;
+    text-align: center;
+}
+.card-desc {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.85);
+    text-align: center;
+    line-height: 1.4;
+}
+.features {
+    padding: 100px 60px;
+    background: white;
+}
+.features-header {
+    text-align: center;
+    margin-bottom: 80px;
+}
+.features-header h2 {
+    font-size: 48px;
+    color: #333;
+    margin-bottom: 15px;
+    font-weight: 900;
+}
+.features-header p {
+    font-size: 18px;
+    color: #666;
+}
+.features-container {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    max-width: 1400px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+}
+.feature-item {
+    text-align: center;
+    padding: 40px 25px;
+    background: linear-gradient(135deg, #bbdefb 0%, #90caf9 100%);
+    border-radius: 20px;
+    transition: 0.4s;
+    cursor: pointer;
+    border-top: 5px solid #0d47a1;
+    flex: 0 1 calc(33.333% - 20px);
+    max-width: 350px;
+}
+.feature-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+.feature-icon {
+    font-size: 50px;
+    margin-bottom: 15px;
+    display: block;
+}
+.feature-item h3 {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+.feature-item p {
+    font-size: 14px;
+    color: #666;
+    line-height: 1.6;
+}
+.pricing {
+    padding: 100px 60px;
+    background: linear-gradient(135deg, #0d47a1 0%, #1565c0 50%, #0d47a1 100%);
+}
+.pricing-header {
+    text-align: center;
+    margin-bottom: 70px;
+    color: white;
+}
+.pricing-header h2 {
+    font-size: 48px;
+    margin-bottom: 15px;
+    font-weight: 900;
+}
+.pricing-header p {
+    font-size: 18px;
+    opacity: 0.9;
+}
+.pricing-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.price-card {
+    background: white;
+    padding: 50px 30px;
+    border-radius: 20px;
+    text-align: center;
+    transition: 0.4s;
+    position: relative;
+}
+.price-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+}
+.price-card.featured {
+    background: linear-gradient(135deg, #1e2d4283 0%, rgba(19, 14, 35, 0.463) 100%);
+    color: white;
+    transform: scale(1.08);
+}
+.price-card h3 {
+    font-size: 24px;
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+.price {
+    font-size: 48px;
+    font-weight: 900;
+    margin: 20px 0;
+}
+.price-card p {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 30px;
+    line-height: 1.8;
+}
+.price-card.featured p {
+    color: rgba(255, 255, 255, 0.9);
+}
+.features-list {
+    text-align: left;
+    margin-bottom: 30px;
+    font-size: 14px;
+    color: #666;
+}
+.price-card.featured .features-list {
+    color: rgba(255, 255, 255, 0.9);
+}
+.features-list li {
+    list-style: none;
+    padding: 8px 0;
+}
+.features-list li:before {
+    content: "✓ ";
+    color: #0d47a1;
+    font-weight: bold;
+    margin-right: 10px;
+}
+.price-card.featured .features-list li:before {
+    color: #ff9800;
+}
+.btn-price {
+    width: 100%;
+    padding: 14px 20px;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.price-card .btn-price {
+    background: #0d47a1;
+    color: white;
+}
+.price-card .btn-price:hover {
+    background: #0a3d91;
+}
+.price-card.featured .btn-price {
+    background: #ff9800;
+    color: #fff;
+}
+.price-card.featured .btn-price:hover {
+    background: #fb8c00;
+}
+.footer {
+    background: #333;
+    color: white;
+    text-align: center;
+    padding: 40px 60px;
+}
+@media (max-width: 768px) {
+    .banner {
+        flex-direction: column;
+        padding: 40px 20px;
+        text-align: center;
+    }
+    .banner-text h1 {
+        font-size: 40px;
+    }
+    .banner-text p {
+        font-size: 16px;
+    }
+    .banner-buttons {
+        justify-content: center;
+    }
+    .banner-graphic {
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        height: auto;
+        margin-top: 40px;
+    }
+    .floating-card {
+        width: 100%;
+        height: 180px;
+        padding: 30px 20px;
+    }
+    .features-container {
+        flex-direction: column;
+    }
+    .pricing-cards {
+        grid-template-columns: 1fr;
+    }
+    .price-card.featured {
+        transform: scale(1);
+    }
+    .menu {
+        gap: 15px;
+        font-size: 12px;
+    }
+    .features-header h2 {
+        font-size: 36px;
+    }
+    .pricing-header h2 {
+        font-size: 36px;
+    }
+}
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="brand">🔐 SecureTools</div>
+        <nav class="menu">
+            <a href="converter.html">Converter</a>
+            <a href="urlencoder.html">URL encoder</a>
+            <a href="passwordstrength.html">Password Strength</a>
+            <a href="crytotools.html">Ciphers</a>
+            <a href="md5hash.html">MD5 Hash</a>
+        </nav>
+    </div>
+    <section class="banner">
+        <div class="banner-text">
+            <h1>Secure Your Digital Data Today</h1>
+            <p>Advanced encryption and security tools to protect your sensitive information.</p>
+        
+        </div>
+        <div class="banner-graphic">
+            <div class="floating-card">
+                <div class="card-icon">🔐</div>
+                <div class="card-title">Crypto Tools</div>
+                <div class="card-desc">Secure encryption for your sensitive data</div>
+            </div>
+            <div class="floating-card">
+                <div class="card-icon">✏️</div>
+                <div class="card-title">Text Converter</div>
+                <div class="card-desc">Transform text instantly</div>
+            </div>
+            <div class="floating-card">
+                <div class="card-icon">🛡️</div>
+                <div class="card-title">Password Strength</div>
+                <div class="card-desc">Check & improve password security</div>
+            </div>
+            <div class="floating-card">
+                <div class="card-icon">🔑</div>
+                <div class="card-title">Data Transformation</div>
+                <div class="card-desc">Encode, hash & transform data</div>
+            </div>
+        </div>
+    </section>
+    <section class="features" id="features">
+        <div class="features-header">
+            <h2>Our Security Tools</h2>
+            <p>Your daily dose of encryption and password protection</p>
+        </div>
+        <div class="features-container">
+            <div class="feature-item" id="aes">
+                <span class="feature-icon">🔐</span>
+                <h3>Crypto Tools</h3>
+                <p>Secure your data instantly with powerful encryption tools.</p>
+            </div>
+            <div class="feature-item" id="cipher">
+                <span class="feature-icon">🔑</span>
+                <h3>Data Transformation Tools</h3>
+                <p>Transform raw data into encoded and hashed forms instantly.</p>
+            </div>
+            <div class="feature-item" id="password">
+                <span class="feature-icon">🛡️</span>
+                <h3>Password Strength</h3>
+                <p>Check your passwords and get real time feedback for better security</p>
+            </div>
+        </div>
+    </section>
+    <section class="pricing" id="pricing">
+        <div class="pricing-header">
+            <h2>What Our Users Say</h2>
+            <p>Real feedback from our satisfied security conscious users</p>
+        </div>
+        <div class="pricing-cards">
+            <div class="price-card">
+                <h3>⭐⭐⭐⭐⭐</h3>
+                <div class="price" style="font-size: 24px; margin: 15px 0;">Amazing Protection</div>
+                <p>"The AES encryption kept my files completely safe. Highly recommended!"</p>
+                <ul class="features-list">
+                    <li>Fast encryption speeds</li>
+                    <li>Very user friendly interface</li>
+                    <li>Excellent customer support</li>
+                    <li>Great value for money</li>
+                    <li>Reliable and secure</li>
+                </ul>
+                <div style="font-weight: 700; margin-top: 15px;">- Sarah Johnson</div>
+            </div>
+            <div class="price-card featured">
+                <h3>⭐⭐⭐⭐⭐</h3>
+                <div class="price" style="font-size: 24px; margin: 15px 0;">Best Password Tool</div>
+                <p>"The password strength checker saved me from multiple security breaches. Essential tool!"</p>
+                <ul class="features-list">
+                    <li>Real-time security alerts</li>
+                    <li>Detailed strength analysis</li>
+                    <li>Easy password generation</li>
+                    <li>Multi-device synchronization</li>
+                    <li>24/7 monitoring enabled</li>
+                </ul>
+                <div style="font-weight: 700; margin-top: 15px;">- Mike Chen</div>
+            </div>
+            <div class="price-card">
+                <h3>⭐⭐⭐⭐⭐</h3>
+                <div class="price" style="font-size: 24px; margin: 15px 0;">Simple & Effective</div>
+                <p>"Caesar Cipher feature is perfect for quick message encoding. Love it!"</p>
+                <ul class="features-list">
+                    <li>Intuitive user interface</li>
+                    <li>Lightning-fast processing</li>
+                    <li>Great documentation</li>
+                    <li>Regular updates included</li>
+                    <li>Affordable pricing option</li>
+                </ul>
+                <div style="font-weight: 700; margin-top: 15px;">- Emma Williams</div>
+            </div>
+        </div>
+    </section>
+    <div class="footer">
+        <p>&copy; 2025 SecureTools. All rights reserved. | Privacy Policy | Terms of Service</p>
+    </div>
+</body>
+</html>

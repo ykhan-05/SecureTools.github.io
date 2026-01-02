@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Binary Converter</title>
+    <link rel="stylesheet" href="converter.css"> 
+</head>
+<body>
+    <header>
+        <h1>Binary Converter</h1>
+        <p>Convert text to binary and vice-versa.</p>
+    </header>
+
+    <div>
+        <nav>
+            <button class="active"> Binary Converter</button>
+        </nav>
+    </div>
+    <div class="div1" id="binary-tool">
+        <h1>Text ↔ Binary</h1>
+        
+        <div class="div2">
+            <h3>Input Text (or Binary String)</h3>
+            <textarea 
+                placeholder="Enter text (e.g., Hello) or binary (e.g., 01001000...) here..." id="input-text" rows="6"></textarea>
+        </div>
+
+        <div class="between">
+            <label>Conversion Options:</label>
+            <button onclick="textToBinary()">Text → Binary</button>
+            <button onclick="binaryToText()">Binary → Text</button>
+        </div>
+
+        <div class="div2">
+            <h3>Output</h3>
+            <textarea 
+                placeholder="Result will appear here..." id="output-text" rows="6" readonly>
+            </textarea>
+        </div>
+    </div>
+    <script>
+        /**
+         * Converts plain text to a binary string (8 bits per character, separated by spaces).
+         */
+        function textToBinary() {
+            const inputText = document.getElementById("input-text").value;
+            let binaryOutput = "";
+
+            for (let i = 0; i < inputText.length; i++) {
+                // Get the ASCII code (0-255) for the character
+                const charCode = inputText.charCodeAt(i);
+                
+                // Convert the ASCII code to an 8-bit binary string
+                const binary = charCode.toString(2).padStart(8, '0');
+                
+                binaryOutput += binary + " ";
+            }
+
+            // Trim trailing space and display
+            document.getElementById("output-text").value = binaryOutput.trim();
+        }
+
+        /**
+         * Converts a binary string (separated by spaces) back to plain text.
+         */
+        function binaryToText() {
+            const inputText = document.getElementById("input-text").value.trim();
+            let textOutput = "";
+            
+            // Split the input string by spaces to get individual binary segments
+            const binarySegments = inputText.split(/\s+/);
+
+            for (let i = 0; i < binarySegments.length; i++) {
+                const binary = binarySegments[i];
+                
+                // Validate if the segment looks like binary
+                if (!/^[01]+$/.test(binary)) {
+                    document.getElementById("output-text").value = "Error: Input contains non-binary segments or unexpected characters.";
+                    return;
+                }
+
+                // Convert the binary segment (base 2) to an integer (ASCII code)
+                const charCode = parseInt(binary, 2);
+                
+                // Convert the ASCII code back to a character
+                textOutput += String.fromCharCode(charCode);
+            }
+
+            document.getElementById("output-text").value = textOutput;
+        }
+    </script>
+</body>
+</html>

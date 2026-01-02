@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>hash generator</title>
+    <link rel="stylesheet" href="md5hash.css">
+     
+</head>
+<body>
+    <header>
+    <h1>MD5 Hash Generator</h1>
+    </header>
+    <div class="container">
+        <h2>Generate Your Hash <br> <p style="font-weight: normal; color: grey; font-size: 14px;">Generate cryptographic hashes for data integrity</p></h2>
+    <div class="input">
+        <h3>Input: </h3>
+        <textarea id="text" placeholder="Enter text..." rows="5"></textarea>
+    </div>
+    
+    <div class="button">
+        <button id="prim1" class="primary-btn" onclick="generatehash()">Generate Hash</button>
+        <button class="btn-clear" onclick="clearFields()">Clear</button>
+    </div>
+   
+    <div class="output">
+        <h3>Result:</h3>
+        <textarea id="result" readonly placeholder="Hash will show here.." rows="1"></textarea>
+    </div> <br>
+     <div class="info"> <h4>How it works</h4> <br>
+    <p style="color: grey;">
+MD5 Hash: Converts any text into a unique 32-character hash. <br>
+One-way function - cannot be reversed back to original text. <br>
+Same input always generates the same hash output.</p>
+
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.js"></script>
+    <script>
+        console.log("CryptoJS loaded?", typeof CryptoJS !== 'undefined');
+        console.log("CryptoJS object:", CryptoJS);
+        function generatehash() {
+            try{
+                console.log("Inside function - CryptoJS:", typeof CryptoJS);
+                const textInput = document.getElementById('text');
+                const text = textInput.value;
+                if (!text.trim()) {
+                    alert("enter a text please!");
+                    return;
+                }
+
+                const hash = CryptoJS.MD5(text).toString();
+                const output = document.getElementById('result');
+                output.value = hash;
+            }
+            catch(error){
+                alert("error generating hash:" + error.message);
+                console.error(error);
+            }
+        }
+        function clearFields() {
+            document.getElementById('text').value = '';
+            document.getElementById('result').value = '';
+        }
+    </script>
+
+</body>
+</html>
